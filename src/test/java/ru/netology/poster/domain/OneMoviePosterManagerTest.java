@@ -1,4 +1,4 @@
-package ru.netology.movies.poster.domain;
+package ru.netology.poster.domain;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;

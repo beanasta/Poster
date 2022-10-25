@@ -1,11 +1,11 @@
-package ru.netology.movies.poster.domain;
+package ru.netology.poster.domain;
 
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
+
 import org.junit.jupiter.api.Test;
 
-public class OverLimitPosterManagerTest {
+public class LimitPosterManagerTest {
 
     PosterManager poster = new PosterManager();
 
@@ -23,8 +23,10 @@ public class OverLimitPosterManagerTest {
     Movie movie12 = new Movie(111, "1917", 2019, "Драма");
 
 
-    @BeforeEach
-    public void setup() {
+    @Test
+
+    public void shouldFindAllMovie() {
+
         poster.save(movie1);
         poster.save(movie2);
         poster.save(movie3);
@@ -38,13 +40,6 @@ public class OverLimitPosterManagerTest {
         poster.save(movie11);
         poster.save(movie12);
 
-
-    }
-
-    @Test
-
-    public void shouldFindAllMovie() {
-
         Movie[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11, movie12};
         Movie[] actual = poster.findAll();
 
@@ -55,9 +50,41 @@ public class OverLimitPosterManagerTest {
 
     @Test
 
-    public void shouldFindLastMovie() {
+    public void shouldFindLastOverLimitMovie() {
+
+        poster.save(movie1);
+        poster.save(movie2);
+        poster.save(movie3);
+        poster.save(movie4);
+        poster.save(movie5);
+        poster.save(movie6);
+        poster.save(movie7);
+        poster.save(movie8);
+        poster.save(movie9);
+        poster.save(movie10);
+        poster.save(movie11);
+        poster.save(movie12);
 
         Movie[] expected = {movie10, movie9, movie8, movie7, movie6, movie5, movie4, movie3, movie2, movie1};
+        Movie[] actual = poster.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+
+
+    }
+
+
+    @Test
+
+    public void shouldFindLastBeforeLimitMovie() {
+
+        poster.save(movie1);
+        poster.save(movie2);
+        poster.save(movie3);
+        poster.save(movie4);
+        poster.save(movie5);
+
+        Movie[] expected = {movie5, movie4, movie3, movie2, movie1};
         Movie[] actual = poster.findLast();
 
         Assertions.assertArrayEquals(expected, actual);

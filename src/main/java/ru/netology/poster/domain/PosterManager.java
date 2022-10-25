@@ -1,4 +1,4 @@
-package ru.netology.movies.poster.domain;
+package ru.netology.poster.domain;
 
 public class PosterManager {
 
