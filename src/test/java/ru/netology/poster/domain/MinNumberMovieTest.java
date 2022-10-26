@@ -30,7 +30,7 @@ public class MinNumberMovieTest {
 
     @Test
 
-    public void shouldReversLastMovies() {
+    public void shouldFindLastMovie() {
 
         Movie[] expected = {movie1};
         Movie[] actual = poster.findLast();

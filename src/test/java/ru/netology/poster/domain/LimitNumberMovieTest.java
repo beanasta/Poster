@@ -43,39 +43,10 @@ public class LimitNumberMovieTest {
 
     @Test
 
-    public void shouldFindAllBeforeLimitMovie() {
-
-        Movie[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9};
-        Movie[] actual = repo.findAll();
-
-        Assertions.assertArrayEquals(expected, actual);
-
-
-    }
-
-
-    @Test
-
     public void shouldFindLastBeforeLimitMovie() {
 
         Movie[] expected = {movie9, movie8, movie7, movie6, movie5, movie4, movie3, movie2, movie1};
         Movie[] actual = poster.findLast();
-
-        Assertions.assertArrayEquals(expected, actual);
-
-
-    }
-
-
-    @Test
-
-    public void shouldFindAllOverLimitMovie() {
-
-        repo.save(movie10);
-        repo.save(movie11);
-
-        Movie[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11};
-        Movie[] actual = repo.findAll();
 
         Assertions.assertArrayEquals(expected, actual);
 
@@ -101,7 +72,7 @@ public class LimitNumberMovieTest {
 
     @Test
 
-    public void shouldRemoveById() {
+    public void shouldRemoveByIdBeforeLimitMovie() {
 
         repo.removeById(movie1.getId());
 
@@ -114,7 +85,7 @@ public class LimitNumberMovieTest {
 
     @Test
 
-    public void shouldRemoveAll() {
+    public void shouldRemoveAllBeforeLimitMovie() {
 
         repo.removeAll();
 
@@ -128,7 +99,22 @@ public class LimitNumberMovieTest {
 
     @Test
 
-    public void shouldFindByIdMovie() {
+    public void shouldFindByIdBeforeLimitMovie() {
+
+        repo.findById(movie5.getId());
+
+        Movie[] expected = {movie5};
+        Movie[] actual = repo.getMovies();
+
+        Assertions.assertArrayEquals(expected, actual);
+
+
+    }
+
+
+    @Test
+
+    public void shouldFindByIdOverLimitMovie() {
 
         repo.findById(movie5.getId());
 
