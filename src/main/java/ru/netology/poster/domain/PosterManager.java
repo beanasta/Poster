@@ -2,46 +2,36 @@ package ru.netology.poster.domain;
 
 public class PosterManager {
 
-
-    private Movie[] movies = new Movie[0];
+    private PosterRepository repo;
 
     private int resultLength;
 
 
-    public void save(Movie movie) {
-
-        Movie[] tmp = new Movie[movies.length + 1];
-        for (int i = 0; i < movies.length; i++) {
-            tmp[i] = movies[i];
-        }
-
-        tmp[tmp.length - 1] = movie;
-        movies = tmp;
-
+    public PosterManager(PosterRepository repo) {
+        this.repo = repo;
     }
 
-
-    public Movie[] findAll() {
-
-        return movies;
-
+    public void add(Movie movie) {
+        repo.save(movie);
     }
 
 
     public Movie[] findLast() {
 
-        Movie[] findLast = movies;
-        if (findLast.length < 10) {
-            resultLength = findLast.length;
-        } else {
+        Movie[] result = repo.getMovies();
+        if (result.length < 10) {
+            resultLength = result.length;
+        }
+        if (result.length >= 10) {
             resultLength = 10;
         }
 
-        Movie[] result = new Movie[resultLength];
-        for (int i = 0; i < resultLength; i++) {
-            result[i] = findLast[resultLength - 1 - i];
+        Movie[] last = new Movie[resultLength];
+        for (int i = 0; i < last.length; i++) {
+            last[i] = result[resultLength - 1 - i];
         }
-        return result;
+
+        return last;
 
 
     }
