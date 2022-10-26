@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class OneMoviePosterManagerTest {
+public class MinNumberMovieTest {
 
     PosterManager poster = new PosterManager();
     Movie movie1 = new Movie(100, "Бладшот", 2020, "Боевик");
@@ -17,9 +17,10 @@ public class OneMoviePosterManagerTest {
 
     @Test
 
-    public void shouldSaveOneMovie() {
+    public void shouldFindLastMovie() {
+
         Movie[] expected = {movie1};
-        Movie[] actual = poster.findAll();
+        Movie[] actual = poster.findLast();
 
         Assertions.assertArrayEquals(expected, actual);
 

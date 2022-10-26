@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
-public class EmptyPosterManagerTest {
+public class EmptyPosterTest {
 
     PosterManager poster = new PosterManager();
 
@@ -16,6 +16,7 @@ public class EmptyPosterManagerTest {
     public void shouldSaveFirstMovie() {
 
         poster.save(movie1);
+
         Movie[] expected = {movie1};
         Movie[] actual = poster.findAll();
 

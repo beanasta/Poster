@@ -30,18 +30,19 @@ public class PosterManager {
 
     public Movie[] findLast() {
 
-        Movie[] findLast = movies;
-        if (findLast.length < 10) {
-            resultLength = findLast.length;
-        } else {
+        Movie[] result = movies;
+        if (result.length < 10) {
+            resultLength = result.length;
+        }
+        if (result.length >= 10) {
             resultLength = 10;
         }
 
-        Movie[] result = new Movie[resultLength];
-        for (int i = 0; i < resultLength; i++) {
-            result[i] = findLast[resultLength - 1 - i];
+        Movie[] last = new Movie[resultLength];
+        for (int i = 0; i < last.length; i++) {
+            last[i] = result[resultLength - 1 - i];
         }
-        return result;
+        return last;
 
 
     }

@@ -2,10 +2,10 @@ package ru.netology.poster.domain;
 
 
 import org.junit.jupiter.api.Assertions;
-
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class LimitPosterManagerTest {
+public class LimitNumberMovieTest {
 
     PosterManager poster = new PosterManager();
 
@@ -23,10 +23,8 @@ public class LimitPosterManagerTest {
     Movie movie12 = new Movie(111, "1917", 2019, "Драма");
 
 
-    @Test
-
-    public void shouldFindAllMovie() {
-
+    @BeforeEach
+    public void setup() {
         poster.save(movie1);
         poster.save(movie2);
         poster.save(movie3);
@@ -36,11 +34,15 @@ public class LimitPosterManagerTest {
         poster.save(movie7);
         poster.save(movie8);
         poster.save(movie9);
-        poster.save(movie10);
-        poster.save(movie11);
-        poster.save(movie12);
 
-        Movie[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11, movie12};
+    }
+
+
+    @Test
+
+    public void shouldFindAllBeforeLimitMovie() {
+
+        Movie[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9};
         Movie[] actual = poster.findAll();
 
         Assertions.assertArrayEquals(expected, actual);
@@ -50,22 +52,9 @@ public class LimitPosterManagerTest {
 
     @Test
 
-    public void shouldFindLastOverLimitMovie() {
+    public void shouldFindLastBeforeLimitMovie() {
 
-        poster.save(movie1);
-        poster.save(movie2);
-        poster.save(movie3);
-        poster.save(movie4);
-        poster.save(movie5);
-        poster.save(movie6);
-        poster.save(movie7);
-        poster.save(movie8);
-        poster.save(movie9);
-        poster.save(movie10);
-        poster.save(movie11);
-        poster.save(movie12);
-
-        Movie[] expected = {movie10, movie9, movie8, movie7, movie6, movie5, movie4, movie3, movie2, movie1};
+        Movie[] expected = {movie9, movie8, movie7, movie6, movie5, movie4, movie3, movie2, movie1};
         Movie[] actual = poster.findLast();
 
         Assertions.assertArrayEquals(expected, actual);
@@ -76,20 +65,34 @@ public class LimitPosterManagerTest {
 
     @Test
 
-    public void shouldFindLastBeforeLimitMovie() {
+    public void shouldFindAllOverLimitMovie() {
 
-        poster.save(movie1);
-        poster.save(movie2);
-        poster.save(movie3);
-        poster.save(movie4);
-        poster.save(movie5);
+        poster.save(movie10);
+        poster.save(movie11);
 
-        Movie[] expected = {movie5, movie4, movie3, movie2, movie1};
+        Movie[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11};
+        Movie[] actual = poster.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+
+
+    }
+
+
+    @Test
+
+    public void shouldFindLastOverLimitMovie() {
+
+        poster.save(movie10);
+        poster.save(movie11);
+
+        Movie[] expected = {movie10, movie9, movie8, movie7, movie6, movie5, movie4, movie3, movie2, movie1};
         Movie[] actual = poster.findLast();
 
         Assertions.assertArrayEquals(expected, actual);
 
 
     }
+
 
 }
