@@ -6,7 +6,7 @@ public class PosterManager {
 
     private int limitMovie;
 
-    int resultLength;
+    private int resultLength;
 
 
     public PosterManager(PosterRepository repo) {
