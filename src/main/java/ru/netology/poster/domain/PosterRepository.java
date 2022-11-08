@@ -4,7 +4,6 @@ public class PosterRepository {
 
     private Movie[] movies = new Movie[0];
 
-
     public Movie[] getMovies() {
         return movies;
     }
@@ -46,7 +45,9 @@ public class PosterRepository {
 
     public Movie[] findAll() {
 
-        return movies;
+        Movie[] all = getMovies();
+
+        return all;
     }
 
 

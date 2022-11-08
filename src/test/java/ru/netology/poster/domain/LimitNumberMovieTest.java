@@ -19,10 +19,9 @@ public class LimitNumberMovieTest {
     Movie movie7 = new Movie(106, "Виновный", 2021, "Триллер");
     Movie movie8 = new Movie(107, "Дюна", 2021, "Приключения");
     Movie movie9 = new Movie(108, "Веном", 2021, "Боевик");
-
     Movie movie10 = new Movie(109, "Довод", 2020, "Боевик");
-
     Movie movie11 = new Movie(110, "Гнев", 2021, "Боевик");
+    Movie movie12 = new Movie(111, "1917", 2019, "Драма");
 
 
     @BeforeEach
@@ -37,7 +36,6 @@ public class LimitNumberMovieTest {
         repo.save(movie7);
         repo.save(movie8);
         repo.save(movie9);
-
     }
 
 
@@ -123,6 +121,121 @@ public class LimitNumberMovieTest {
 
         Assertions.assertArrayEquals(expected, actual);
 
+
+    }
+
+
+    @Test
+
+    public void shouldFindAllBeforeLimitMovie() {
+
+        Movie[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9};
+        Movie[] actual = repo.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+
+
+    }
+
+    @Test
+
+    public void shouldFindAllOverLimitMovie() {
+
+        repo.save(movie10);
+        repo.save(movie11);
+        repo.save(movie12);
+
+        Movie[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11, movie12};
+        Movie[] actual = repo.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+
+
+    }
+
+
+    @Test
+
+    public void shouldFindLastNewLimit() {
+
+        repo.save(movie10);
+        repo.save(movie11);
+
+        poster.setLimitMovie(5);
+
+        Movie[] expected = {movie5, movie4, movie3, movie2, movie1};
+        Movie[] actual = poster.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+
+    public void shouldSetNewLimit() {
+
+        poster.setLimitMovie(9);
+
+        int expected = 9;
+        int actual = poster.getLimitMovie();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+
+    public void shouldSetBeforeMinLimit() {
+
+        poster.setLimitMovie(0);
+
+        int expected = 10;
+        int actual = poster.getLimitMovie();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+
+    public void shouldSetMinLimit() {
+
+        poster.setLimitMovie(1);
+
+        int expected = 1;
+        int actual = poster.getLimitMovie();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+
+    public void shouldSetNegativeLimit() {
+
+        poster.setLimitMovie(-25);
+
+        int expected = 10;
+        int actual = poster.getLimitMovie();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+
+    public void shouldSetLimitOverMovie() {
+
+        poster.setLimitMovie(15);
+
+        Movie[] expected = {movie9, movie8, movie7, movie6, movie5, movie4, movie3, movie2, movie1};
+        Movie[] actual = poster.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
 
     }
 

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class EmptyPosterTest {
 
     PosterRepository repo = new PosterRepository();
-    PosterManager poster = new PosterManager(repo);
+
 
     Movie movie1 = new Movie(100, "Бладшот", 2020, "Боевик");
 

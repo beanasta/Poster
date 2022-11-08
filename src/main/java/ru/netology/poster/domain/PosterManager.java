@@ -4,12 +4,35 @@ public class PosterManager {
 
     private PosterRepository repo;
 
-    private int resultLength;
+    private int limitMovie;
+
+    int resultLength;
 
 
     public PosterManager(PosterRepository repo) {
         this.repo = repo;
+        this.limitMovie = 10;
+
     }
+
+    public PosterManager(int limitMovie) {
+        this.limitMovie = limitMovie;
+    }
+
+
+    public int getLimitMovie() {
+        return limitMovie;
+    }
+
+
+    public void setLimitMovie(int limitMovie) {
+        if (limitMovie <= 0) {
+            return;
+        }
+
+        this.limitMovie = limitMovie;
+    }
+
 
     public void add(Movie movie) {
         repo.save(movie);
@@ -18,12 +41,14 @@ public class PosterManager {
 
     public Movie[] findLast() {
 
+
         Movie[] result = repo.getMovies();
-        if (result.length < 10) {
+
+
+        if (limitMovie < result.length) {
+            resultLength = limitMovie;
+        } else {
             resultLength = result.length;
-        }
-        if (result.length >= 10) {
-            resultLength = 10;
         }
 
         Movie[] last = new Movie[resultLength];
