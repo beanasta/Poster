@@ -5,8 +5,33 @@ public class PosterManager {
 
     private Movie[] movies = new Movie[0];
 
-    private int resultLength;
 
+    private int limitMovie;
+
+    public Movie[] getMovies() {
+        return movies;
+    }
+
+    public PosterManager() {
+        this.limitMovie = 10;
+
+    }
+
+    public PosterManager(int limitMovie) {
+        this.limitMovie = limitMovie;
+    }
+
+    public int getLimitMovie() {
+        return limitMovie;
+    }
+
+    public void setLimitMovie(int limitMovie) {
+        if (limitMovie <= 0) {
+            return;
+        }
+        this.limitMovie = limitMovie;
+
+    }
 
     public void save(Movie movie) {
 
@@ -23,19 +48,22 @@ public class PosterManager {
 
     public Movie[] findAll() {
 
-        return movies;
+        Movie[] all = getMovies();
+        return all;
 
     }
 
 
     public Movie[] findLast() {
 
-        Movie[] result = movies;
-        if (result.length < 10) {
+        int resultLength;
+
+        Movie[] result = getMovies();
+
+        if (limitMovie < result.length) {
+            resultLength = limitMovie;
+        } else {
             resultLength = result.length;
-        }
-        if (result.length >= 10) {
-            resultLength = 10;
         }
 
         Movie[] last = new Movie[resultLength];

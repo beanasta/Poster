@@ -69,8 +69,9 @@ public class LimitNumberMovieTest {
 
         poster.save(movie10);
         poster.save(movie11);
+        poster.save(movie12);
 
-        Movie[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11};
+        Movie[] expected = {movie1, movie2, movie3, movie4, movie5, movie6, movie7, movie8, movie9, movie10, movie11, movie12};
         Movie[] actual = poster.findAll();
 
         Assertions.assertArrayEquals(expected, actual);
@@ -91,6 +92,92 @@ public class LimitNumberMovieTest {
 
         Assertions.assertArrayEquals(expected, actual);
 
+
+    }
+
+
+    @Test
+
+    public void shouldFindLastNewLimit() {
+
+        poster.save(movie10);
+        poster.save(movie11);
+
+        poster.setLimitMovie(5);
+
+        Movie[] expected = {movie5, movie4, movie3, movie2, movie1};
+        Movie[] actual = poster.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
+
+    }
+
+    @Test
+
+    public void shouldSetNewLimit() {
+
+        poster.setLimitMovie(9);
+
+        int expected = 9;
+        int actual = poster.getLimitMovie();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+
+    public void shouldSetBeforeMinLimit() {
+
+        poster.setLimitMovie(0);
+
+        int expected = 10;
+        int actual = poster.getLimitMovie();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+
+    public void shouldSetMinLimit() {
+
+        poster.setLimitMovie(1);
+
+        int expected = 1;
+        int actual = poster.getLimitMovie();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+
+    public void shouldSetNegativeLimit() {
+
+        poster.setLimitMovie(-25);
+
+        int expected = 10;
+        int actual = poster.getLimitMovie();
+
+        Assertions.assertEquals(expected, actual);
+
+    }
+
+
+    @Test
+
+    public void shouldSetLimitOverMovie() {
+
+        poster.setLimitMovie(15);
+
+        Movie[] expected = {movie9, movie8, movie7, movie6, movie5, movie4, movie3, movie2, movie1};
+        Movie[] actual = poster.findLast();
+
+        Assertions.assertArrayEquals(expected, actual);
 
     }
 

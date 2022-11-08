@@ -11,6 +11,7 @@ public class EmptyPosterTest {
 
     Movie movie1 = new Movie(100, "Бладшот", 2020, "Боевик");
 
+
     @Test
 
     public void shouldSaveFirstMovie() {
